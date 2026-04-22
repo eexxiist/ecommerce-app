@@ -1,10 +1,7 @@
-const router = require('express').Router()
+const router = require("express").Router();
+const brandController = require("../controllers/brandController");
 
-router.post("/", (req, res) => {
-    res.json({ message: 'device works' })
-});
-router.get("/", (req, res) => {
-    res.json({ message: 'device works' })
-});
+router.post("/", brandController.create);
+router.get("/", brandController.getAll);
 
 module.exports = router;

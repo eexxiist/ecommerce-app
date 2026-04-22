@@ -1,14 +1,15 @@
-class UserController{
-    async registration(req, res){
+const ApiError = require("../errors/ApiError");
 
-    }
-    async login(req, res){
-        
-    }
-    async check(req, res){
-        const {id} = req.query
-        res.json(id)
+class UserController {
+    async registration(req, res) {}
+    async login(req, res) {}
+    async check(req, res, next) {
+        const { id } = req.query;
+        if (!id) {
+            return next(ApiError.badRequest("нет айди"));
+        }
+        res.json(id);
     }
 }
 
-module.exports = new UserController()
+module.exports = new UserController();
