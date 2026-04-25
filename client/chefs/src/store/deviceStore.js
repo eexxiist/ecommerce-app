@@ -43,6 +43,20 @@ export default class DeviceStore {
                 rating: 5,
                 img: "https://img.mvideo.ru//Big/30087004bb.jpg",
             },
+            {
+                id: 5,
+                name: "Iphone 12 pro",
+                price: 25000,
+                rating: 5,
+                img: "https://img.mvideo.ru//Big/30087004bb.jpg",
+            },
+            {
+                id: 6,
+                name: "Iphone 12 pro",
+                price: 25000,
+                rating: 5,
+                img: "https://img.mvideo.ru//Big/30087004bb.jpg",
+            },
         ];
         this._selectedType = {};
         this._selectedBrand = {};
