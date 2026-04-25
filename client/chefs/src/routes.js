@@ -10,7 +10,7 @@ import Admin from "./pages/Admin";
 import Basket from "./pages/Basket";
 import Auth from "./pages/Auth";
 import Shop from "./pages/Shop";
-import DeviceShop from "./pages/DeviceShop";
+import DeviceShop from "./pages/DevicePage";
 
 export const authRouter = [
     {
