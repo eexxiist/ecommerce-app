@@ -1,16 +1,75 @@
-# React + Vite
+# 🛍️ Online Store (React + Node.js)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Небольшое веб-приложение интернет-магазина с каталогом товаров, фильтрацией и административной панелью.
 
-Currently, two official plugins are available:
+## 🚀 Возможности
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+* 📦 Просмотр списка товаров
+* 🔍 Фильтрация по типу и бренду
+* 📄 Страница товара с характеристиками
+* 🔐 Авторизация и регистрация
+* ⚙️ Админ-панель:
 
-## React Compiler
+  * добавление типов
+  * добавление брендов
+  * добавление устройств
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## 🛠️ Технологии
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Frontend
+
+* React
+* MobX
+* React Router
+* Axios
+* React Bootstrap
+
+### Backend
+
+* Node.js
+* Express
+* PostgreSQL
+* Sequelize
+* JWT авторизация
+
+---
+
+## 📁 Структура проекта
+
+```
+client/
+ ├── components/
+ ├── pages/
+ ├── store/
+ ├── http/
+ └── utils/
+
+server/
+ ├── controllers/
+ ├── routes/
+ ├── models/
+ ├── middleware/
+ └── index.js
+```
+
+---
+
+
+## 🔑 Авторизация
+
+После регистрации пользователь получает JWT токен, который:
+
+* сохраняется в `localStorage`
+* автоматически добавляется в запросы через Axios interceptor
+
+---
+
+## 📌 Примечания
+
+* Проект использует MobX для управления состоянием
+* Фильтрация товаров происходит через query параметры (`typeId`, `brandId`)
+* Админ доступ реализован через проверку роли (`ADMIN`)
+
+---
