@@ -7,7 +7,7 @@ const BrandBar = observer(() => {
     const { device } = useContext(Context);
     return (
         <Row className="d-flex">
-            {device.brands.map((brand) => (
+            {device.brands?.map((brand) => (
                 <Card
                     style={{
                         cursor: "pointer",
@@ -15,13 +15,16 @@ const BrandBar = observer(() => {
                         textAlign: "center",
                     }}
                     border={
-                        brand.id === device.selectedBrand.id
+                        brand.id === device.selectedBrand?.id
                             ? "danger"
                             : "light"
                     }
                     key={brand.id}
                     className="p-3"
-                    onClick={() => device.setSelectedBrand(brand)}
+                    onClick={() => {
+                        console.log("CLICK BRAND:", brand);
+                        device.setSelectedBrand(brand);
+                    }}
                 >
                     {brand.name}
                 </Card>

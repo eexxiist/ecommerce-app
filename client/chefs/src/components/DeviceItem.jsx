@@ -13,7 +13,11 @@ const DeviceItem = ({ device }) => {
                 border={"light"}
                 onClick={() => history(DEVICE_ROUTE + "/" + device.id)}
             >
-                <Image width={150} height={150} src={device.img} />
+                <Image
+                    width={150}
+                    height={150}
+                    src={import.meta.env.VITE_API_URL + device.img}
+                />
                 <div className=" mt-2 d-flex justify-content-between align-items-center">
                     <div className="text-black-50">Samsung...</div>
                     <div className="d-flex">
