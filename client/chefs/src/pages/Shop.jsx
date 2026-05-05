@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from "react";
-import { Col, Container, Row } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import TypeBar from "../components/TypeBar";
 import BrandBar from "../components/BrandBar";
 import DeviceList from "../components/DeviceList";
@@ -10,19 +10,18 @@ import Pages from "../components/Pages";
 
 const Shop = observer(() => {
     const { device } = useContext(Context);
+
     useEffect(() => {
         fetchTypes().then((data) => device.setTypes(data));
         fetchBrands().then((data) => device.setBrands(data));
-        
     }, []);
 
     useEffect(() => {
-        console.log("SELECTED:", device.selectedType, device.selectedBrand);
         fetchDevice(
             device.selectedType?.id,
             device.selectedBrand?.id,
             device.page,
-            2
+            6
         ).then((data) => {
             device.setDevices(data.rows);
             device.setTotalCount(data.count);
@@ -30,17 +29,31 @@ const Shop = observer(() => {
     }, [device.page, device.selectedType, device.selectedBrand]);
 
     return (
-        <Container>
-            <Row className="mt-3">
-                <Col md={3}>
+        <Container style={{ marginTop: "24px" }}>
+            <div style={{ display: "flex", gap: "24px" }}>
+                <div
+                    style={{
+                        width: "220px",
+                        display: "flex",
+                        flexDirection: "column",
+                        gap: "16px",
+                    }}
+                >
                     <TypeBar />
-                </Col>
-                <Col md={9}>
-                    <BrandBar />
+                </div>
+
+                <div style={{ flex: 1 }}>
+                    <div style={{ marginBottom: "16px" }}>
+                        <BrandBar />
+                    </div>
+
                     <DeviceList />
-                    <Pages />
-                </Col>
-            </Row>
+
+                    <div style={{ marginTop: "24px" }}>
+                        <Pages />
+                    </div>
+                </div>
+            </div>
         </Container>
     );
 });

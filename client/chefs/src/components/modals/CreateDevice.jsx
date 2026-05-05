@@ -58,7 +58,7 @@ const CreateDevice = observer(({ show, onHide }) => {
                 <Form>
                     <Dropdown className="mt-2 mb-2">
                         <Dropdown.Toggle>
-                            {device.selectedType.name || "Выбрать тип"}
+                            {device.selectedType?.name || "Выбрать тип"}
                         </Dropdown.Toggle>
                         <Dropdown.Menu>
                             {device.types.map((type) => (
@@ -73,7 +73,7 @@ const CreateDevice = observer(({ show, onHide }) => {
                     </Dropdown>
                     <Dropdown className="mt-2 mb-2">
                         <Dropdown.Toggle>
-                            {device.selectedBrand.name || "Выбрать бренд"}
+                            {device.selectedBrand?.name || "Выбрать бренд"}
                         </Dropdown.Toggle>
                         <Dropdown.Menu>
                             {device.brands.map((brand) => (

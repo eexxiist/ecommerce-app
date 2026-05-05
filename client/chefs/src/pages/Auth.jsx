@@ -1,6 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Button, Container, Form, Row, Col } from "react-bootstrap";
-import Card from "react-bootstrap/Card";
+import { Container, Button, Form } from "react-bootstrap";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { LOGIN_ROUTE, REGISTRATION_ROUTE, SHOP_ROUTE } from "../utils/consts";
 import { login, registration } from "../http/userAPI";
@@ -10,8 +9,10 @@ import { Context } from "../main";
 const Auth = observer(() => {
     const { user } = useContext(Context);
     const location = useLocation();
-    const history = useNavigate();
+    const navigate = useNavigate();
+
     const isLogin = location.pathname === LOGIN_ROUTE;
+
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
@@ -25,58 +26,108 @@ const Auth = observer(() => {
             }
             user.setUser(data);
             user.setIsAuth(true);
-            history(SHOP_ROUTE);
-        } catch (error) {
-            alert(error.response.data.message);
+            navigate(SHOP_ROUTE);
+        } catch (e) {
+            alert(e.response?.data?.message || "Ошибка");
         }
     };
 
     return (
         <Container
-            className="d-flex justify-content-center align-items-center"
-            style={{ height: window.innerHeight - 54 }}
+            style={{
+                height: "calc(100vh - 60px)",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+            }}
         >
-            <Card style={{ width: 600 }} className="p-5">
-                <h2 className="m-auto">
-                    {isLogin ? "Авторизация" : "Регистрация"}
-                </h2>
+            <div
+                style={{
+                    width: "360px",
+                    padding: "24px",
+                    borderRadius: "12px",
+                    background: "#f5f5f5",
+                    border: "1px solid #e5e5e5",
+                }}
+            >
+                <h4
+                    style={{
+                        marginBottom: "16px",
+                        color: "#333",
+                        textAlign: "center",
+                    }}
+                >
+                    {isLogin ? "Вход" : "Регистрация"}
+                </h4>
+
                 <Form className="d-flex flex-column">
                     <Form.Control
-                        className="mt-3"
-                        placeholder="Введите ваш email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
+                        placeholder="Email"
+                        style={{
+                            marginBottom: "10px",
+                            borderRadius: "8px",
+                            border: "1px solid #ddd",
+                        }}
                     />
+
                     <Form.Control
-                        className="mt-3"
-                        placeholder="Введите ваш пароль"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         type="password"
+                        placeholder="Пароль"
+                        style={{
+                            marginBottom: "14px",
+                            borderRadius: "8px",
+                            border: "1px solid #ddd",
+                        }}
                     />
-                    <Row className="justify-content-between align-items-center mt-3">
-                        {isLogin ? (
-                            <Col xs="auto">
-                                Нет аккаунта?{" "}
-                                <NavLink to={REGISTRATION_ROUTE}>
-                                    Зарегистрируйтесь
-                                </NavLink>
-                            </Col>
-                        ) : (
-                            <Col xs="auto">
-                                Есть аккаунт?{" "}
-                                <NavLink to={LOGIN_ROUTE}>Войдите</NavLink>
-                            </Col>
-                        )}
 
-                        <Col xs="auto">
-                            <Button variant="outline-success" onClick={click}>
-                                {isLogin ? "Войти" : "Регистрация"}
-                            </Button>
-                        </Col>
-                    </Row>
+                    <div
+                        style={{
+                            fontSize: "13px",
+                            color: "#666",
+                            marginBottom: "12px",
+                        }}
+                    >
+                        {isLogin ? (
+                            <>
+                                Нет аккаунта?{" "}
+                                <NavLink
+                                    to={REGISTRATION_ROUTE}
+                                    style={{ color: "#444" }}
+                                >
+                                    Зарегистрироваться
+                                </NavLink>
+                            </>
+                        ) : (
+                            <>
+                                Уже есть аккаунт?{" "}
+                                <NavLink
+                                    to={LOGIN_ROUTE}
+                                    style={{ color: "#444" }}
+                                >
+                                    Войти
+                                </NavLink>
+                            </>
+                        )}
+                    </div>
+
+                    <Button
+                        onClick={click}
+                        style={{
+                            background: "#e0e0e0",
+                            border: "none",
+                            color: "#333",
+                            borderRadius: "8px",
+                            padding: "8px",
+                        }}
+                    >
+                        {isLogin ? "Войти" : "Создать аккаунт"}
+                    </Button>
                 </Form>
-            </Card>
+            </div>
         </Container>
     );
 });
